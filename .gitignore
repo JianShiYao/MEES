@@ -1,0 +1,12 @@
+# Local Obsidian UI state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+
+# MkDocs output
+site/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
