@@ -15,6 +15,7 @@ nav:
       - 配置管理过程: 01_Main_Process/06_配置管理过程.md
   - 过程管理:
       - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
+      - ASPICE + ISO/IEC 33020 过程映射表: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
   - 模板:
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
