@@ -20,6 +20,12 @@ nav:
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
       - 过程文档评审检查表: 14_Checklists/过程文档评审检查表.md
+      - 项目管理过程检查表: 14_Checklists/项目管理过程检查表.md
+      - 需求管理过程检查表: 14_Checklists/需求管理过程检查表.md
+      - 架构设计过程检查表: 14_Checklists/架构设计过程检查表.md
+      - 验证确认过程检查表: 14_Checklists/验证确认过程检查表.md
+      - 发布管理过程检查表: 14_Checklists/发布管理过程检查表.md
+      - 配置管理过程检查表: 14_Checklists/配置管理过程检查表.md
 theme:
   name: material
   language: zh
