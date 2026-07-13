@@ -1,0 +1,1 @@
+1、需要“读取当前打开笔记 / 和 Obsidian UI 状态联动”时，再上 Local REST API 型。

@@ -1,0 +1,26 @@
+site_name: MEES 现代嵌入式研发工程体系
+site_description: Modern Embedded Engineering System
+repo_name: MEES
+nav:
+  - 首页: index.md
+  - 开始:
+      - MEES 总览: 00_Introduction/00_MEES总览.md
+      - 建设路线图: 00_Introduction/01_建设路线图.md
+  - 过程管理:
+      - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
+  - 模板:
+      - 文档章节模板: 13_Templates/文档章节模板.md
+  - 检查表:
+      - 过程文档评审检查表: 14_Checklists/过程文档评审检查表.md
+theme:
+  name: material
+  language: zh
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
