@@ -6,6 +6,12 @@ nav:
   - 开始:
       - MEES 总览: 00_Introduction/00_MEES总览.md
       - 建设路线图: 00_Introduction/01_建设路线图.md
+  - 主流程:
+      - 项目管理过程: 01_Main_Process/01_项目管理过程.md
+      - 需求管理过程: 01_Main_Process/02_需求管理过程.md
+      - 架构设计过程: 01_Main_Process/03_架构设计过程.md
+      - 验证确认过程: 01_Main_Process/04_验证确认过程.md
+      - 发布管理过程: 01_Main_Process/05_发布管理过程.md
   - 过程管理:
       - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
   - 模板:
