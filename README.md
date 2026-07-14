@@ -120,14 +120,15 @@ mkdocs serve
 
 3. 从 `docs/00_Introduction/00_MEES总览.md` 开始阅读体系总览。
 4. 阅读 `docs/00_Introduction/01_建设路线图.md` 了解建设顺序。
-5. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
-6. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
+5. 阅读 `docs/00_Introduction/04_v0.3建设计划.md` 了解当前工作包、门禁和验收标准。
+6. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
+7. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
 
 ## 当前版本
 
-- 版本：v0.2.0-dev
-- 阶段：v0.2 核心过程建设
-- 状态：核心过程基线 Go（SIM-QA-001 模拟审计签署），已批准进入 v0.3；不构成真实独立审计或能力等级证明
+- 版本：v0.3.0-dev（`v0.2.0` 已发布）
+- 阶段：v0.3 标准映射建设
+- 状态：v0.3 计划已建立，正在冻结标准来源、版本和映射规则；v0.2 的模拟签署不构成真实独立审计或能力等级证明
 - 日期：2026-07-14
 
 ## 许可证说明
