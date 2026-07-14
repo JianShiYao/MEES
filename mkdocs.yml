@@ -7,18 +7,27 @@ nav:
       - MEES 总览: 00_Introduction/00_MEES总览.md
       - 建设路线图: 00_Introduction/01_建设路线图.md
   - 主流程:
+      - v0.2 核心过程总览: 01_Main_Process/00_核心过程总览.md
       - 项目管理过程: 01_Main_Process/01_项目管理过程.md
       - 需求管理过程: 01_Main_Process/02_需求管理过程.md
       - 架构设计过程: 01_Main_Process/03_架构设计过程.md
       - 验证确认过程: 01_Main_Process/04_验证确认过程.md
       - 发布管理过程: 01_Main_Process/05_发布管理过程.md
       - 配置管理过程: 01_Main_Process/06_配置管理过程.md
+      - 变更与问题管理过程: 01_Main_Process/07_变更与问题管理过程.md
+  - 专业过程:
+      - 产品规划过程: 01_Product_Management/01_产品规划过程.md
+      - 系统工程过程: 03_System_Engineering/01_系统工程过程.md
+      - 软件工程过程: 04_Software_Engineering/01_软件工程过程.md
+      - 集成与测试过程: 05_Test_Engineering/01_集成与测试过程.md
   - 过程管理:
       - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
       - ASPICE + ISO/IEC 33020 过程映射表: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
+      - v0.2 基线评审记录: 11_Process_Management/v0.2基线评审记录.md
   - 模板:
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
+      - v0.2 核心过程基线检查表: 14_Checklists/v0.2核心过程基线检查表.md
       - 过程文档评审检查表: 14_Checklists/过程文档评审检查表.md
       - 项目管理过程检查表: 14_Checklists/项目管理过程检查表.md
       - 需求管理过程检查表: 14_Checklists/需求管理过程检查表.md
@@ -26,6 +35,8 @@ nav:
       - 验证确认过程检查表: 14_Checklists/验证确认过程检查表.md
       - 发布管理过程检查表: 14_Checklists/发布管理过程检查表.md
       - 配置管理过程检查表: 14_Checklists/配置管理过程检查表.md
+  - 案例:
+      - v0.2 核心流程桌面走查: 15_Case_Study/v0.2核心流程桌面走查.md
 theme:
   name: material
   language: zh

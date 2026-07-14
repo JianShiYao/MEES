@@ -48,6 +48,7 @@ flowchart TB
 
 ## 5. 文档状态
 
-- 成熟度：L1 骨架级
-- 完成度：15%
+- 成熟度：L1 核心过程基线评审中
+- 完成度：40%
+- 当前门禁：v0.2 Conditional Go，M1–M3 整改待独立复核关闭
 - 维护方式：Git + Obsidian + MkDocs
