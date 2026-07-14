@@ -68,6 +68,7 @@ REQUIRED_PILOT_COPIES = {
 # v0.5 前瞻草稿模板：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
 V05_TEMPLATE_SPECS = {
     "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人"),
+    "TPL-V05-002": ("20_Safety/UL9540A_Thermal_Runaway_Test_Evidence_Template.md", "P0", "功能安全负责人"),
 }
 
 

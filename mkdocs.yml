@@ -30,6 +30,7 @@ nav:
   - 功能安全:
       - ISO 26262 过程映射: 07_Functional_Safety/ISO_26262过程映射.md
       - 储能功能安全（IEC 61508/UL 9540A）映射: 07_Functional_Safety/储能功能安全_IEC61508_UL9540A映射.md
+      - 储能功能安全管理（FSM）过程: 07_Functional_Safety/ESS功能安全管理过程.md
   - 网络安全:
       - IEC 62443 过程映射: 08_Cybersecurity/IEC_62443过程映射.md
   - 度量:
@@ -62,6 +63,7 @@ nav:
       - MK8 RSIIC V1 项目试点: 15_Case_Study/MK8_RSIIC_V1项目试点.md
       - MK8 RSIIC V1 证据台账: 15_Case_Study/MK8_RSIIC_V1证据台账.md
       - v0.5 WP1/WP2 自动化与追溯走查: 15_Case_Study/v0.5_WP1_WP2自动化与追溯走查.md
+      - v0.5 WP6 ESS 安全方法走查: 15_Case_Study/v0.5_WP6_ESS安全方法走查.md
       - v0.3 标准映射桌面走查: 15_Case_Study/v0.3标准映射桌面走查.md
       - v0.2 核心流程桌面走查: 15_Case_Study/v0.2核心流程桌面走查.md
 theme:
