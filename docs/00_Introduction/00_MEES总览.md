@@ -50,5 +50,5 @@ flowchart TB
 
 - 成熟度：L1 核心过程基线评审中
 - 完成度：40%
-- 当前门禁：v0.2 Conditional Go，M1–M4 整改待独立复核关闭
+- 当前门禁：v0.2 Conditional Go，M1–M4 已确认关闭，待独立评审人身份补充和最终签署
 - 维护方式：Git + Obsidian + MkDocs
