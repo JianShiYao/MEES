@@ -71,6 +71,35 @@ def rule_links(md_files):
     return out
 
 
+def rule_docs_scope(md_files):
+    """docs/ 内文档不得链接到站点外（MkDocs --strict 会拒绝），与严格构建对齐。"""
+    out = []
+    docs_dir = (ROOT / "docs").resolve()
+    for md in md_files:
+        try:
+            md.resolve().relative_to(docs_dir)
+        except ValueError:
+            continue
+        base = md.parent
+        for i, text in enumerate(md.read_text(encoding="utf-8").splitlines(), 1):
+            for target in LINK_RE.findall(text):
+                if target.startswith(("http://", "https://", "#", "mailto:")):
+                    continue
+                clean = target.split("#")[0]
+                if not clean:
+                    continue
+                resolved = (base / clean).resolve()
+                if not resolved.exists():
+                    continue  # 缺失由 LINK-001 负责
+                try:
+                    resolved.relative_to(docs_dir)
+                except ValueError:
+                    out.append(diag("LINK-002", "error", md, i,
+                                    f"docs 内文档链接指向站点外：{target}",
+                                    "改为代码引用或指向 docs/ 内文档；MkDocs --strict 拒绝站点外链接"))
+    return out
+
+
 def rule_docnum(md_files):
     out = []
     seen = {}
@@ -145,7 +174,7 @@ def rule_nav(md_files):
     return out
 
 
-RULES = [rule_links, rule_docnum, rule_mermaid, rule_evidence, rule_nav]
+RULES = [rule_links, rule_docs_scope, rule_docnum, rule_mermaid, rule_evidence, rule_nav]
 
 
 def main() -> int:
