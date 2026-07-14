@@ -25,8 +25,8 @@ nav:
       - 集成与测试过程: 05_Test_Engineering/01_集成与测试过程.md
   - 过程管理:
       - v0.3 标准映射总览: 11_Process_Management/v0.3标准映射总览.md
+      - ASPICE + ISO/IEC 33020 详细映射: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
       - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
-      - ASPICE + ISO/IEC 33020 过程映射表: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
       - v0.2 基线评审记录: 11_Process_Management/v0.2基线评审记录.md
   - 模板:
       - 文档章节模板: 13_Templates/文档章节模板.md
