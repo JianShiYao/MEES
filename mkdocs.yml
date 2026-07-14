@@ -37,6 +37,7 @@ nav:
   - 度量:
       - 指标字典: 12_Metrics/指标字典.md
   - 过程管理:
+      - v0.5 基线评审记录: 11_Process_Management/v0.5基线评审记录.md
       - v0.4 基线评审记录: 11_Process_Management/v0.4基线评审记录.md
       - v0.3 标准映射总览: 11_Process_Management/v0.3标准映射总览.md
       - ASPICE + ISO/IEC 33020 详细映射: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
@@ -49,6 +50,7 @@ nav:
       - v0.4 模板目录与使用规则: 13_Templates/v0.4模板目录与使用规则.md
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
+      - v0.5 自动化与度量基线检查表: 14_Checklists/v0.5自动化与度量基线检查表.md
       - v0.4 工程模板基线检查表: 14_Checklists/v0.4工程模板基线检查表.md
       - 嵌入式目标级验证检查表: 14_Checklists/嵌入式目标级验证检查表.md
       - v0.3 标准映射基线检查表: 14_Checklists/v0.3标准映射基线检查表.md
