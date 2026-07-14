@@ -23,14 +23,24 @@ nav:
       - 系统工程过程: 03_System_Engineering/01_系统工程过程.md
       - 软件工程过程: 04_Software_Engineering/01_软件工程过程.md
       - 集成与测试过程: 05_Test_Engineering/01_集成与测试过程.md
+  - 质量工程:
+      - ISO 9001 过程映射: 06_Quality_Engineering/ISO_9001过程映射.md
+  - 功能安全:
+      - ISO 26262 过程映射: 07_Functional_Safety/ISO_26262过程映射.md
+  - 网络安全:
+      - IEC 62443 过程映射: 08_Cybersecurity/IEC_62443过程映射.md
   - 过程管理:
       - v0.3 标准映射总览: 11_Process_Management/v0.3标准映射总览.md
       - ASPICE + ISO/IEC 33020 详细映射: 11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md
+      - 跨标准控制与证据矩阵: 11_Process_Management/跨标准控制与证据矩阵.md
+      - v0.3 差距与行动项: 11_Process_Management/v0.3差距与行动项.md
+      - v0.3 基线评审记录: 11_Process_Management/v0.3基线评审记录.md
       - ISO/IEC 33020 中文工程解读: 11_Process_Management/ISO_IEC_33020中文工程解读.md
       - v0.2 基线评审记录: 11_Process_Management/v0.2基线评审记录.md
   - 模板:
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
+      - v0.3 标准映射基线检查表: 14_Checklists/v0.3标准映射基线检查表.md
       - v0.2 核心过程基线检查表: 14_Checklists/v0.2核心过程基线检查表.md
       - 过程文档评审检查表: 14_Checklists/过程文档评审检查表.md
       - 项目管理过程检查表: 14_Checklists/项目管理过程检查表.md
@@ -40,6 +50,7 @@ nav:
       - 发布管理过程检查表: 14_Checklists/发布管理过程检查表.md
       - 配置管理过程检查表: 14_Checklists/配置管理过程检查表.md
   - 案例:
+      - v0.3 标准映射桌面走查: 15_Case_Study/v0.3标准映射桌面走查.md
       - v0.2 核心流程桌面走查: 15_Case_Study/v0.2核心流程桌面走查.md
 theme:
   name: material

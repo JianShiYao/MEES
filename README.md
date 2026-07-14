@@ -122,14 +122,15 @@ mkdocs serve
 4. 阅读 `docs/00_Introduction/01_建设路线图.md` 了解建设顺序。
 5. 阅读 `docs/00_Introduction/04_v0.3建设计划.md` 了解当前工作包、门禁和验收标准。
 6. 阅读 `docs/11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md` 查看 WP1 详细映射和能力差距。
-7. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
-8. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
+7. 阅读 `docs/11_Process_Management/跨标准控制与证据矩阵.md` 和 `docs/11_Process_Management/v0.3差距与行动项.md` 查看共同控制及 v0.4 输入。
+8. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
+9. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
 
 ## 当前版本
 
 - 版本：v0.3.0-dev（`v0.2.0` 已发布）
 - 阶段：v0.3 标准映射建设
-- 状态：V3-G0 已通过内部多角色复核，WP0 规则已冻结，WP1 第一层详细映射进行中；该批准和 v0.2 模拟签署均不构成独立评估、认证或能力等级证明
+- 状态：WP0–WP6 候选内容已完成，准备 V3-G4 冻结和内部人工评审；不构成独立评估、认证或能力等级证明
 - 日期：2026-07-14
 
 ## 许可证说明
