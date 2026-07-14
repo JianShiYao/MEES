@@ -10,3 +10,7 @@ site/
 __pycache__/
 *.py[cod]
 .venv/
+
+# Local project source used by the MK8 process pilot. The source keeps its own
+# Git history and must not be embedded in or pushed with the public MEES repo.
+examples/rsiic_-mk8_-v1/

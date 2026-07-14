@@ -50,6 +50,8 @@ nav:
       - 发布管理过程检查表: 14_Checklists/发布管理过程检查表.md
       - 配置管理过程检查表: 14_Checklists/配置管理过程检查表.md
   - 案例:
+      - MK8 RSIIC V1 项目试点: 15_Case_Study/MK8_RSIIC_V1项目试点.md
+      - MK8 RSIIC V1 证据台账: 15_Case_Study/MK8_RSIIC_V1证据台账.md
       - v0.3 标准映射桌面走查: 15_Case_Study/v0.3标准映射桌面走查.md
       - v0.2 核心流程桌面走查: 15_Case_Study/v0.2核心流程桌面走查.md
 theme:

@@ -3,22 +3,34 @@
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED_DIRS = {".git", ".venv", "site", "__pycache__"}
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
 
 def markdown_files() -> list[Path]:
-    return sorted(
-        path
-        for path in ROOT.rglob("*.md")
-        if not IGNORED_DIRS.intersection(path.relative_to(ROOT).parts)
+    result = subprocess.run(
+        [
+            "git",
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "-z",
+            "--",
+            "*.md",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
     )
+    paths = result.stdout.decode("utf-8").split("\0")
+    return sorted(ROOT / path for path in paths if path)
 
 
 def link_target(raw_target: str) -> str:

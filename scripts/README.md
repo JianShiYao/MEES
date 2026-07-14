@@ -4,7 +4,7 @@
 
 当前脚本：
 
-- `check_markdown_links.py`：检查仓库内 Markdown 相对链接是否指向存在的文件或目录。
+- `check_markdown_links.py`：检查 Git 已跟踪和未忽略的新 Markdown 相对链接是否指向存在的文件或目录；本地私有项目、构建输出和其他忽略内容不进入统计。
 
 运行方式：
 
