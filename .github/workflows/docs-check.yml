@@ -13,6 +13,9 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
+      # 脚本单元测试（成功/规则失败/无数据/格式错误/断链）
+      - name: 脚本单元测试
+        run: python -m unittest discover -s tests -p "test_*.py"
       # 自动化检查（标准库脚本，error 级失败即红）
       - name: Markdown 链接
         run: python scripts/check_markdown_links.py
