@@ -25,6 +25,7 @@ nav:
       - 系统工程过程: 03_System_Engineering/01_系统工程过程.md
       - 软件工程过程: 04_Software_Engineering/01_软件工程过程.md
       - 集成与测试过程: 05_Test_Engineering/01_集成与测试过程.md
+      - 嵌入式目标级验证方法: 05_Test_Engineering/嵌入式目标级验证方法.md
   - 质量工程:
       - ISO 9001 过程映射: 06_Quality_Engineering/ISO_9001过程映射.md
   - 功能安全:
@@ -49,6 +50,7 @@ nav:
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
       - v0.4 工程模板基线检查表: 14_Checklists/v0.4工程模板基线检查表.md
+      - 嵌入式目标级验证检查表: 14_Checklists/嵌入式目标级验证检查表.md
       - v0.3 标准映射基线检查表: 14_Checklists/v0.3标准映射基线检查表.md
       - v0.2 核心过程基线检查表: 14_Checklists/v0.2核心过程基线检查表.md
       - 过程文档评审检查表: 14_Checklists/过程文档评审检查表.md
