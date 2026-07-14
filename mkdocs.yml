@@ -10,6 +10,7 @@ nav:
       - 版本规范: 00_Introduction/03_版本规范.md
       - v0.3.0 建设计划: 00_Introduction/04_v0.3建设计划.md
       - v0.4.0 工程模板建设计划: 00_Introduction/05_v0.4工程模板建设计划.md
+      - v0.5.0 自动化与度量建设计划: 00_Introduction/06_v0.5自动化与度量建设计划.md
   - 主流程:
       - v0.2 核心过程总览: 01_Main_Process/00_核心过程总览.md
       - 项目管理过程: 01_Main_Process/01_项目管理过程.md

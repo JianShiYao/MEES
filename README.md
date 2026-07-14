@@ -45,7 +45,7 @@ flowchart TB
 | `.obsidian/` | 保存 Obsidian 仓库级配置和插件开关。 | 让整个仓库可以作为 Obsidian Vault 使用；工作区和关系图状态属于本地文件，已由 `.gitignore` 排除。 |
 | `.agents/` | 预留给开发工具或 Agent 运行时的项目级配置。 | 与 `agents/` 分工：前者面向工具运行配置，后者面向可复用的工程 Agent 资产；当前目录尚未启用正式内容。 |
 | `docs/` | MEES 正式知识库和 MkDocs 文档站的内容源。 | 由 `mkdocs.yml` 组织导航，是其他资产的使用说明、过程依据和治理入口。 |
-| `templates/` | v0.4 可复制工程模板的规范资产目录；18 项候选模板已完成，等待 V4-G5 人工评审。 | 模板依据来自 `docs/`；目录和使用说明进入 `docs/13_Templates/`，模拟实例与走查结论进入 `examples/` 和 `docs/15_Case_Study/`。 |
+| `templates/` | v0.4 的 18 项工程模板已形成内部基线；`TPL-V05-*` 保存后续增量草稿。 | 模板依据来自 `docs/`；目录和使用说明进入 `docs/13_Templates/`，模拟实例与走查结论进入 `examples/` 和 `docs/15_Case_Study/`。 |
 | `checklists/` | 预留可直接执行或被工具读取的工程、质量、安全和发布检查表。 | 检查项依据来自过程文档；面向阅读的检查表发布在 `docs/14_Checklists/`。 |
 | `examples/` | 放置本地项目源代码或可公开的最小示例；原始项目可保持独立 Git 历史并由外层仓库忽略。 | 使用 `templates/` 和 `checklists/` 落实 `docs/` 中的过程，过程实例与脱敏结论进入 `docs/15_Case_Study/`。 |
 | `scripts/` | 预留链接检查、追溯矩阵生成、指标汇总和发布文档生成脚本。 | 自动处理 `docs/`、`templates/`、`checklists/` 和项目数据，并向 CI 或 `dashboard/` 提供结果。 |
@@ -120,18 +120,18 @@ mkdocs serve
 
 3. 从 `docs/00_Introduction/00_MEES总览.md` 开始阅读体系总览。
 4. 阅读 `docs/00_Introduction/01_建设路线图.md` 了解建设顺序。
-5. 阅读 `docs/00_Introduction/05_v0.4工程模板建设计划.md` 了解当前工作包、门禁和验收标准。
+5. 阅读 `docs/00_Introduction/06_v0.5自动化与度量建设计划.md` 了解当前工作包、门禁和验收标准。
 6. 阅读 `docs/11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md` 查看 WP1 详细映射和能力差距。
 7. 阅读 `docs/11_Process_Management/跨标准控制与证据矩阵.md` 和 `docs/11_Process_Management/v0.3差距与行动项.md` 查看共同控制及 v0.4 输入。
 8. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
 9. 阅读 `docs/13_Templates/v0.4模板目录与使用规则.md`，从 `templates/` 选择并复制工程模板。
-10. 阅读 `docs/15_Case_Study/MK8_RSIIC_V1_v0.4模板走查.md`，了解模拟实例、模板验证结论与产品 `No-Go` 边界。
+10. 阅读 `docs/15_Case_Study/MK8_RSIIC_V1_v0.4模板走查.md`，了解 v0.5 自动化输入、模拟实例与产品 `No-Go` 边界。
 
 ## 当前版本
 
-- 版本：v0.3.0
-- 阶段：v0.4 工程模板建设
-- 状态：v0.3.0 已发布；v0.4 的 V4-G1–V4-G4 候选完成，等待 V4-G5 人工评审。模板实例不构成 MK8 产品批准、独立评估、标准符合性、认证或能力等级证明
+- 版本：v0.4.0（内部基线，待执行版本发布）
+- 阶段：v0.5 自动化与度量规划
+- 状态：V4-G5 已 `Go`；v0.5 处于 V5-G0 范围准备。模板和模拟实例不构成 MK8/ESS 产品批准、独立评估、标准符合性、认证或能力等级证明
 - 日期：2026-07-14
 
 ## 许可证说明
