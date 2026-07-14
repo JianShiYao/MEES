@@ -65,6 +65,11 @@ REQUIRED_PILOT_COPIES = {
     "TPL-V04-013",
 }
 
+# v0.5 前瞻草稿模板：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
+V05_TEMPLATE_SPECS = {
+    "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人"),
+}
+
 
 def metadata_value(content: str, label: str) -> str | None:
     match = re.search(rf"^> {re.escape(label)}：(.+)$", content, re.MULTILINE)
@@ -107,6 +112,28 @@ def main() -> int:
         if actual_owner != owner:
             failures.append(f"{relative_path}: expected owner {owner}, got {actual_owner}")
 
+    v05_found = 0
+    for template_id, (relative_path, priority, owner) in V05_TEMPLATE_SPECS.items():
+        path = ROOT / "templates" / relative_path
+        if not path.exists():
+            failures.append(f"missing v0.5 template: {relative_path}")
+            continue
+        content = path.read_text(encoding="utf-8")
+        for label in REQUIRED_METADATA:
+            if metadata_value(content, label) is None:
+                failures.append(f"{relative_path}: missing metadata {label}")
+        for section in REQUIRED_SECTIONS:
+            if section not in content:
+                failures.append(f"{relative_path}: missing section {section}")
+        actual_id = metadata_value(content, "模板标识")
+        if actual_id != template_id:
+            failures.append(f"{relative_path}: expected {template_id}, got {actual_id}")
+        elif actual_id in found_ids:
+            failures.append(f"duplicate template id: {actual_id}")
+        else:
+            found_ids.add(actual_id)
+            v05_found += 1
+
     pilot_ids: set[str] = set()
     if not PILOT_ROOT.exists():
         failures.append(f"missing pilot directory: {PILOT_ROOT.relative_to(ROOT)}")
@@ -136,7 +163,8 @@ def main() -> int:
         return 1
 
     print(
-        "Validated 18 templates (P0=13, P1=5) and "
+        "Validated 18 templates (P0=13, P1=5), "
+        f"{v05_found} v0.5 draft template(s) and "
         f"{len(pilot_ids)} MK8 pilot copies: OK"
     )
     return 0

@@ -28,6 +28,7 @@ nav:
       - ISO 9001 过程映射: 06_Quality_Engineering/ISO_9001过程映射.md
   - 功能安全:
       - ISO 26262 过程映射: 07_Functional_Safety/ISO_26262过程映射.md
+      - 储能功能安全（IEC 61508/UL 9540A）映射: 07_Functional_Safety/储能功能安全_IEC61508_UL9540A映射.md
   - 网络安全:
       - IEC 62443 过程映射: 08_Cybersecurity/IEC_62443过程映射.md
   - 过程管理:
