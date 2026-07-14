@@ -6,6 +6,8 @@ nav:
   - 开始:
       - MEES 总览: 00_Introduction/00_MEES总览.md
       - 建设路线图: 00_Introduction/01_建设路线图.md
+      - 文档与编号规范: 00_Introduction/02_文档与编号规范.md
+      - 版本规范: 00_Introduction/03_版本规范.md
   - 主流程:
       - v0.2 核心过程总览: 01_Main_Process/00_核心过程总览.md
       - 项目管理过程: 01_Main_Process/01_项目管理过程.md

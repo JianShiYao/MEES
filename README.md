@@ -120,13 +120,14 @@ mkdocs serve
 
 3. 从 `docs/00_Introduction/00_MEES总览.md` 开始阅读体系总览。
 4. 阅读 `docs/00_Introduction/01_建设路线图.md` 了解建设顺序。
-5. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
+5. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。
+6. 从 `docs/13_Templates/文档章节模板.md` 复制新文档模板。
 
 ## 当前版本
 
 - 版本：v0.2.0-dev
 - 阶段：v0.2 核心过程建设
-- 状态：核心过程基线 Conditional Go，主要问题整改待独立复核关闭
+- 状态：核心过程基线 Conditional Go，M1–M4 整改及新候选验证待独立复核关闭
 - 日期：2026-07-14
 
 ## 许可证说明
