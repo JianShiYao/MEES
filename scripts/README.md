@@ -13,7 +13,7 @@
 - `check_mermaid.py`（v0.6 WP1）：使用固定版本 Mermaid CLI 真实渲染全部 Git 跟踪 Markdown 围栏，失败定位到源文件和行；本地可用 `--allow-npx`。
 - `run_all_checks.py`（v0.6 WP1）：单一全量入口，编排单元测试、文档/模板/追溯/指标/Dashboard/Agent 案例/Mermaid/MkDocs，输出 `build/v06/all-checks.json`。
 - `agent_runtime.py` / `run_agent.py`（v0.6 WP2–WP4）：执行六类只读 Agent 协议，输出固定为待人工复核的 D/S 建议。
-- `obsidian_adapter.py`（v0.6 WP5）：实现 O0/O1、O2 REST 兼容只读及降级、O3 白名单/预览/确认/审计/回滚；仓库默认关闭写入。
+- `obsidian_adapter.py`（v0.6 WP5）：实现 O0/O1、O2 REST 兼容只读及降级、O2 活动笔记（`/active/`）读取、O3 白名单/预览/确认/审计/回滚；仓库默认关闭写入。提供 CLI：`python scripts/obsidian_adapter.py status|o0-read|o1-search|o2-read|o2-active|o3-propose|o3-apply|o3-rollback`（真实试点见 [Obsidian O2/O3 试点走查](../docs/15_Case_Study/v0.6_ObsidianO2O3试点走查.md)）。
 - `run_agent_pilot.py`（v0.6 WP6）：运行 MK8 六 Agent 模拟走查并固定保留产品 `No-Go`。
 
 脚本单元测试见 `tests/`（覆盖成功/规则失败/无数据/格式错误/断链）：`python -m unittest discover -s tests`。

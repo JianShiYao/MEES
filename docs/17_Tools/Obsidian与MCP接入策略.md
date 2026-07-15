@@ -16,6 +16,7 @@
 - Git、文件系统、MkDocs 和仓库脚本是当前权威读写与验证路径，即 O0/O1 基础可用。
 - 已建立不含秘密的 `config/obsidian_integration.json` 和 `scripts/obsidian_adapter.py`；运行审计进入 Git 忽略的 `build/obsidian/`。
 - O2/O3 的适配器、降级和临时目录安全测试已实现，但没有真实服务连接或批准范围证据，不得描述为“已连接 Obsidian MCP”。
+- 适配器已补 `/active/` 活动笔记读取与 CLI 运行器（`python scripts/obsidian_adapter.py status|o2-read|o2-active|o3-propose|o3-apply|o3-rollback`）；真实试点步骤与证据槽位见 [Obsidian O2/O3 试点走查](../15_Case_Study/v0.6_ObsidianO2O3试点走查.md)。连接真实服务与批准写入仍分别受 V6-G3/V6-G4 控制。
 
 ## 3. 接入层级
 
