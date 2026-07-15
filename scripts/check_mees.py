@@ -25,6 +25,16 @@ DOCNUM_RE = re.compile(r"^>\s*文档编号：\s*(\S+)", re.MULTILINE)
 EVID_RE = re.compile(r"证据状态：\s*([A-Za-z+/、,\s一-鿿]+?)\s*$", re.MULTILINE)
 NAV_ENTRY_RE = re.compile(r":\s*([0-9A-Za-z_][^:\s]*\.md)\s*$")
 EVID_TOKENS = {"D", "S", "P", "I"}
+V051_CANDIDATE_DOCS = (
+    "docs/00_Introduction/06_v0.5自动化与度量建设计划.md",
+    "docs/05_Test_Engineering/嵌入式目标级验证方法.md",
+    "docs/07_Functional_Safety/ESS功能安全管理过程.md",
+    "docs/07_Functional_Safety/储能功能安全_IEC61508_UL9540A映射.md",
+    "docs/11_Process_Management/v0.5基线评审记录.md",
+    "docs/12_Metrics/指标字典.md",
+    "docs/15_Case_Study/v0.5_WP1_WP2自动化与追溯走查.md",
+    "docs/15_Case_Study/v0.5_WP6_ESS安全方法走查.md",
+)
 
 
 def rel(path: Path) -> str:
@@ -115,7 +125,7 @@ def rule_docnum(md_files):
     return out
 
 
-def rule_mermaid(md_files):
+def rule_fences(md_files):
     out = []
     for md in md_files:
         lines = md.read_text(encoding="utf-8").splitlines()
@@ -128,7 +138,7 @@ def rule_mermaid(md_files):
                 else:
                     open_fence = None
         if open_fence is not None:
-            out.append(diag("MERMAID-001", "error", md, open_fence[0],
+            out.append(diag("FENCE-001", "error", md, open_fence[0],
                             "代码围栏未成对闭合",
                             "补齐结尾 ``` 围栏"))
     return out
@@ -174,7 +184,78 @@ def rule_nav(md_files):
     return out
 
 
-RULES = [rule_links, rule_docs_scope, rule_docnum, rule_mermaid, rule_evidence, rule_nav]
+def rule_baseline_lifecycle(md_files):
+    del md_files
+    out = []
+    expected_version = "v0.5.1-dev"
+    expected_status = "评审中（v0.5.1 收口候选）"
+    expected_updated = "2026-07-15"
+    for relative_path in V051_CANDIDATE_DOCS:
+        path = ROOT / relative_path
+        if not path.exists():
+            out.append(
+                diag(
+                    "BASELINE-001",
+                    "error",
+                    relative_path,
+                    0,
+                    "v0.5.1 收口候选缺少受控文档",
+                    "补齐候选文档或修订候选清单",
+                )
+            )
+            continue
+        content = path.read_text(encoding="utf-8")
+        version = re.search(r"^> 版本：(.+)$", content, re.MULTILINE)
+        status = re.search(r"^> 状态：(.+)$", content, re.MULTILINE)
+        updated = re.search(r"^> 最后更新：(.+)$", content, re.MULTILINE)
+        actual_version = version.group(1).strip() if version else None
+        actual_status = status.group(1).strip() if status else None
+        actual_updated = updated.group(1).strip() if updated else None
+        if actual_version != expected_version:
+            out.append(
+                diag(
+                    "BASELINE-001",
+                    "error",
+                    path,
+                    4,
+                    f"候选版本应为 {expected_version}，实际为 {actual_version}",
+                    "同步文档头部版本与收口候选版本",
+                )
+            )
+        if actual_status != expected_status:
+            out.append(
+                diag(
+                    "BASELINE-001",
+                    "error",
+                    path,
+                    5,
+                    f"候选状态应为 {expected_status}，实际为 {actual_status}",
+                    "同步文档头部状态；批准前不得标为已批准",
+                )
+            )
+        if actual_updated != expected_updated:
+            out.append(
+                diag(
+                    "BASELINE-001",
+                    "error",
+                    path,
+                    7,
+                    f"候选最后更新日期应为 {expected_updated}，实际为 {actual_updated}",
+                    "同步文档头部最后更新日期与收口候选冻结日期",
+                )
+            )
+    return out
+
+
+RULES = [
+    rule_links,
+    rule_docs_scope,
+    rule_docnum,
+    rule_fences,
+    rule_evidence,
+    rule_nav,
+    rule_baseline_lifecycle,
+]
 
 
 def main() -> int:

@@ -1,4 +1,4 @@
-"""Validate the v0.4 template catalog and MK8 pilot copies."""
+"""Validate released v0.4 templates, v0.5.1 candidates, and pilot copies."""
 
 from __future__ import annotations
 
@@ -65,16 +65,36 @@ REQUIRED_PILOT_COPIES = {
     "TPL-V04-013",
 }
 
-# v0.5 前瞻草稿模板：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
+# v0.5.1 收口候选：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
 V05_TEMPLATE_SPECS = {
-    "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人"),
-    "TPL-V05-002": ("20_Safety/UL9540A_Thermal_Runaway_Test_Evidence_Template.md", "P0", "功能安全负责人"),
+    "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人", "v0.5.1-dev", "评审中（v0.5.1 收口候选）"),
+    "TPL-V05-002": ("20_Safety/UL9540A_Thermal_Runaway_Test_Evidence_Template.md", "P0", "功能安全负责人", "v0.5.1-dev", "评审中（v0.5.1 收口候选）"),
 }
 
 
 def metadata_value(content: str, label: str) -> str | None:
     match = re.search(rf"^> {re.escape(label)}：(.+)$", content, re.MULTILINE)
     return match.group(1).strip() if match else None
+
+
+def validate_lifecycle(
+    content: str,
+    relative_path: str,
+    expected_version: str,
+    expected_status: str,
+) -> list[str]:
+    failures = []
+    actual_version = metadata_value(content, "模板版本")
+    actual_status = metadata_value(content, "状态")
+    if actual_version != expected_version:
+        failures.append(
+            f"{relative_path}: expected version {expected_version}, got {actual_version}"
+        )
+    if actual_status != expected_status:
+        failures.append(
+            f"{relative_path}: expected status {expected_status}, got {actual_status}"
+        )
+    return failures
 
 
 def main() -> int:
@@ -112,9 +132,20 @@ def main() -> int:
             priorities[priority] += 1
         if actual_owner != owner:
             failures.append(f"{relative_path}: expected owner {owner}, got {actual_owner}")
+        failures.extend(
+            validate_lifecycle(
+                content, relative_path, "v0.4.0", "已批准（内部基线）"
+            )
+        )
 
     v05_found = 0
-    for template_id, (relative_path, priority, owner) in V05_TEMPLATE_SPECS.items():
+    for template_id, (
+        relative_path,
+        priority,
+        owner,
+        version,
+        status,
+    ) in V05_TEMPLATE_SPECS.items():
         path = ROOT / "templates" / relative_path
         if not path.exists():
             failures.append(f"missing v0.5 template: {relative_path}")
@@ -134,6 +165,15 @@ def main() -> int:
         else:
             found_ids.add(actual_id)
             v05_found += 1
+        actual_priority = metadata_value(content, "优先级")
+        actual_owner = metadata_value(content, "最终责任角色")
+        if actual_priority != priority:
+            failures.append(
+                f"{relative_path}: expected priority {priority}, got {actual_priority}"
+            )
+        if actual_owner != owner:
+            failures.append(f"{relative_path}: expected owner {owner}, got {actual_owner}")
+        failures.extend(validate_lifecycle(content, relative_path, version, status))
 
     pilot_ids: set[str] = set()
     if not PILOT_ROOT.exists():
@@ -165,7 +205,7 @@ def main() -> int:
 
     print(
         "Validated 18 templates (P0=13, P1=5), "
-        f"{v05_found} v0.5 draft template(s) and "
+        f"{v05_found} v0.5.1 correction candidate template(s) and "
         f"{len(pilot_ids)} MK8 pilot copies: OK"
     )
     return 0

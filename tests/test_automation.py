@@ -13,6 +13,7 @@ SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 import check_mees as cm  # noqa: E402
+import check_template_assets as cta  # noqa: E402
 import generate_traceability as gt  # noqa: E402
 import collect_metrics as cmet  # noqa: E402
 
@@ -49,10 +50,10 @@ class CheckMeesRules(unittest.TestCase):
         d = cm.rule_docnum([a, b])
         self.assertTrue(any(x["rule_id"] == "NUM-001" for x in d))
 
-    def test_mermaid_unbalanced(self):  # 格式错误
+    def test_fence_unbalanced(self):  # 格式错误
         a = self.w("docs/a.md", "```mermaid\nflowchart LR\nA-->B\n")
-        d = cm.rule_mermaid([a])
-        self.assertTrue(any(x["rule_id"] == "MERMAID-001" for x in d))
+        d = cm.rule_fences([a])
+        self.assertTrue(any(x["rule_id"] == "FENCE-001" for x in d))
 
     def test_evidence_bad_token(self):
         a = self.w("docs/a.md", "证据状态：X\n")
@@ -70,6 +71,22 @@ class CheckMeesRules(unittest.TestCase):
         (self.tmp / "mkdocs.yml").write_text("nav:\n  - A: a.md\n", encoding="utf-8")
         d = cm.rule_nav([])
         self.assertTrue(any(x["rule_id"] == "NAV-001" for x in d))
+
+    def test_candidate_lifecycle_mismatch(self):
+        self.w(
+            "docs/candidate.md",
+            "> 版本：v0.5.0-dev\n> 状态：评审中\n> 最后更新：2026-07-15\n",
+        )
+        original = cm.V051_CANDIDATE_DOCS
+        cm.V051_CANDIDATE_DOCS = ("docs/candidate.md",)
+        try:
+            d = cm.rule_baseline_lifecycle([])
+        finally:
+            cm.V051_CANDIDATE_DOCS = original
+        self.assertEqual(
+            len([x for x in d if x["rule_id"] == "BASELINE-001"]),
+            2,
+        )
 
 
 class Traceability(unittest.TestCase):
@@ -122,6 +139,30 @@ class Metrics(unittest.TestCase):
 
     def test_pct_full(self):
         self.assertEqual(cmet.pct(3, 3), 100.0)
+
+
+class TemplateLifecycle(unittest.TestCase):
+    def test_expected_lifecycle(self):
+        content = "> 模板版本：v0.5.1-dev\n> 状态：评审中（v0.5.1 收口候选）\n"
+        self.assertEqual(
+            cta.validate_lifecycle(
+                content,
+                "template.md",
+                "v0.5.1-dev",
+                "评审中（v0.5.1 收口候选）",
+            ),
+            [],
+        )
+
+    def test_rejects_draft_in_correction_candidate(self):
+        content = "> 模板版本：v0.5.0-dev\n> 状态：草稿\n"
+        failures = cta.validate_lifecycle(
+            content,
+            "template.md",
+            "v0.5.1-dev",
+            "评审中（v0.5.1 收口候选）",
+        )
+        self.assertEqual(len(failures), 2)
 
 
 if __name__ == "__main__":
