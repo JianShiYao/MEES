@@ -20,7 +20,7 @@
 
 ## 当前建设重点
 
-1. 评审 [v0.6.0 Agent 与 Obsidian 集成建设计划](00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)，形成 V6-G0 范围决定。
-2. 按 F4/F5/F6 顺序补齐单一检查入口、追溯 warning 处置和 Mermaid 真实渲染。
+1. V6-G0 已批准；阅读 [v0.6 启动评审记录](11_Process_Management/v0.6启动评审记录.md)和[建设计划](00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)，确认实施边界。
+2. 当前进入 WP1，按 F4/F5/F6 顺序补齐单一检查入口、追溯 warning 处置和 Mermaid 真实渲染。
 3. 冻结六类 Agent 的共同协议、权限和证据边界，再进入 BMS 参考项目走查。
 4. Obsidian 集成保持 O0 文件系统优先；O2 只读和 O3 受控写入分别通过 V6-G3/V6-G4 后启用。

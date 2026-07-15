@@ -8,4 +8,4 @@ v0.6 计划包含 Requirement、Architecture、Review、Test、ASPICE、Metrics 
 - [Agent 协作与治理总览](../docs/16_Agents/00_Agent协作与治理总览.md)
 - [Obsidian 与 MCP 接入策略](../docs/17_Tools/Obsidian与MCP接入策略.md)
 
-当前状态为 V6-G0 准备，尚无 Agent 资产达到已批准或可发布状态。Agent 默认只能读取、分析和生成草稿；不得自动批准门禁、升级证据或发布产品。
+V6-G0 已批准，当前进入 WP1/WP2 准备；尚无 Agent 资产达到已批准或可发布状态。Agent 默认只能读取、分析和生成草稿；不得自动批准门禁、升级证据或发布产品。

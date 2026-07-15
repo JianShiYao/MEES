@@ -5,7 +5,7 @@
 - 建立 `MEES-LIF-014` v0.6 Agent 与 Obsidian 集成建设计划，定义 WP0–WP7、V6-G0–G6 和 M6 验收标准。
 - 将 v0.5 遗留 F4/F5/F6 纳入 v0.6 前置关闭范围。
 - 建立 Agent 协作与治理总览、Obsidian/MCP O0–O3 分层接入策略和六类 Agent 目录。
-- 当前停在 V6-G0 准备；Agent、MCP 只读/写入和 BMS 参考项目实现尚未批准。
+- JianShi 人工批准 V6-G0，冻结范围、权限、证据边界和实施顺序，允许进入 WP1；Agent、MCP 只读/写入和 BMS 参考项目仍受后续门禁控制。
 
 ## v0.5.1 — 2026-07-15
 

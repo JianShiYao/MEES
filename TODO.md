@@ -78,7 +78,7 @@
 
 - [x] 建立 [v0.6.0 Agent 与 Obsidian 集成建设计划](docs/00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)。
 - [x] 建立 Agent 治理总览和 Obsidian/MCP O0–O3 分层接入策略。
-- [ ] V6-G0：批准 WP0–WP7、权限、证据边界、M6 和 F4/F5/F6 实施顺序。
+- [x] V6-G0：JianShi 批准 WP0–WP7、权限、证据边界、M6 和 F4/F5/F6 实施顺序。
 - [ ] WP1：关闭 F4，建立单一本地全检查入口和单次至少三条正反追溯查询。
 - [ ] WP1：关闭 F5，逐项处置 MK8 15 项、ESS 4 项追溯 warning。
 - [ ] WP1：关闭 F6，在 CI 中真实解析/渲染全部 Mermaid 围栏。
