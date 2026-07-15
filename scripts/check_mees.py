@@ -25,13 +25,14 @@ DOCNUM_RE = re.compile(r"^>\s*文档编号：\s*(\S+)", re.MULTILINE)
 EVID_RE = re.compile(r"证据状态：\s*([A-Za-z+/、,\s一-鿿]+?)\s*$", re.MULTILINE)
 NAV_ENTRY_RE = re.compile(r":\s*([0-9A-Za-z_][^:\s]*\.md)\s*$")
 EVID_TOKENS = {"D", "S", "P", "I"}
-V051_CANDIDATE_DOCS = (
+V051_BASELINE_DOCS = (
     "docs/00_Introduction/06_v0.5自动化与度量建设计划.md",
     "docs/05_Test_Engineering/嵌入式目标级验证方法.md",
     "docs/07_Functional_Safety/ESS功能安全管理过程.md",
     "docs/07_Functional_Safety/储能功能安全_IEC61508_UL9540A映射.md",
     "docs/11_Process_Management/v0.5基线评审记录.md",
     "docs/12_Metrics/指标字典.md",
+    "docs/13_Templates/v0.4模板目录与使用规则.md",
     "docs/15_Case_Study/v0.5_WP1_WP2自动化与追溯走查.md",
     "docs/15_Case_Study/v0.5_WP6_ESS安全方法走查.md",
 )
@@ -187,10 +188,10 @@ def rule_nav(md_files):
 def rule_baseline_lifecycle(md_files):
     del md_files
     out = []
-    expected_version = "v0.5.1-dev"
-    expected_status = "评审中（v0.5.1 收口候选）"
+    expected_version = "v0.5.1"
+    expected_status = "已批准（内部基线）"
     expected_updated = "2026-07-15"
-    for relative_path in V051_CANDIDATE_DOCS:
+    for relative_path in V051_BASELINE_DOCS:
         path = ROOT / relative_path
         if not path.exists():
             out.append(
@@ -199,8 +200,8 @@ def rule_baseline_lifecycle(md_files):
                     "error",
                     relative_path,
                     0,
-                    "v0.5.1 收口候选缺少受控文档",
-                    "补齐候选文档或修订候选清单",
+                    "v0.5.1 内部基线缺少受控文档",
+                    "补齐基线文档或修订受控清单",
                 )
             )
             continue
@@ -218,8 +219,8 @@ def rule_baseline_lifecycle(md_files):
                     "error",
                     path,
                     4,
-                    f"候选版本应为 {expected_version}，实际为 {actual_version}",
-                    "同步文档头部版本与收口候选版本",
+                    f"基线版本应为 {expected_version}，实际为 {actual_version}",
+                    "同步文档头部版本与批准基线版本",
                 )
             )
         if actual_status != expected_status:
@@ -229,8 +230,8 @@ def rule_baseline_lifecycle(md_files):
                     "error",
                     path,
                     5,
-                    f"候选状态应为 {expected_status}，实际为 {actual_status}",
-                    "同步文档头部状态；批准前不得标为已批准",
+                    f"基线状态应为 {expected_status}，实际为 {actual_status}",
+                    "同步文档头部状态与 V5.1-G1 批准决定",
                 )
             )
         if actual_updated != expected_updated:
@@ -240,8 +241,8 @@ def rule_baseline_lifecycle(md_files):
                     "error",
                     path,
                     7,
-                    f"候选最后更新日期应为 {expected_updated}，实际为 {actual_updated}",
-                    "同步文档头部最后更新日期与收口候选冻结日期",
+                    f"基线最后更新日期应为 {expected_updated}，实际为 {actual_updated}",
+                    "同步文档头部最后更新日期与基线批准日期",
                 )
             )
     return out

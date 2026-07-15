@@ -72,17 +72,17 @@ class CheckMeesRules(unittest.TestCase):
         d = cm.rule_nav([])
         self.assertTrue(any(x["rule_id"] == "NAV-001" for x in d))
 
-    def test_candidate_lifecycle_mismatch(self):
+    def test_baseline_lifecycle_mismatch(self):
         self.w(
             "docs/candidate.md",
             "> 版本：v0.5.0-dev\n> 状态：评审中\n> 最后更新：2026-07-15\n",
         )
-        original = cm.V051_CANDIDATE_DOCS
-        cm.V051_CANDIDATE_DOCS = ("docs/candidate.md",)
+        original = cm.V051_BASELINE_DOCS
+        cm.V051_BASELINE_DOCS = ("docs/candidate.md",)
         try:
             d = cm.rule_baseline_lifecycle([])
         finally:
-            cm.V051_CANDIDATE_DOCS = original
+            cm.V051_BASELINE_DOCS = original
         self.assertEqual(
             len([x for x in d if x["rule_id"] == "BASELINE-001"]),
             2,
@@ -143,24 +143,24 @@ class Metrics(unittest.TestCase):
 
 class TemplateLifecycle(unittest.TestCase):
     def test_expected_lifecycle(self):
-        content = "> 模板版本：v0.5.1-dev\n> 状态：评审中（v0.5.1 收口候选）\n"
+        content = "> 模板版本：v0.5.1\n> 状态：已批准（内部基线）\n"
         self.assertEqual(
             cta.validate_lifecycle(
                 content,
                 "template.md",
-                "v0.5.1-dev",
-                "评审中（v0.5.1 收口候选）",
+                "v0.5.1",
+                "已批准（内部基线）",
             ),
             [],
         )
 
-    def test_rejects_draft_in_correction_candidate(self):
+    def test_rejects_draft_in_released_baseline(self):
         content = "> 模板版本：v0.5.0-dev\n> 状态：草稿\n"
         failures = cta.validate_lifecycle(
             content,
             "template.md",
-            "v0.5.1-dev",
-            "评审中（v0.5.1 收口候选）",
+            "v0.5.1",
+            "已批准（内部基线）",
         )
         self.assertEqual(len(failures), 2)
 

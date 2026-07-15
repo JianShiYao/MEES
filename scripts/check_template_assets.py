@@ -1,4 +1,4 @@
-"""Validate released v0.4 templates, v0.5.1 candidates, and pilot copies."""
+"""Validate released v0.4/v0.5.1 templates and pilot copies."""
 
 from __future__ import annotations
 
@@ -65,10 +65,10 @@ REQUIRED_PILOT_COPIES = {
     "TPL-V04-013",
 }
 
-# v0.5.1 收口候选：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
+# v0.5.1 增量基线：单独校验，不计入 v0.4 冻结基线的 18/P0=13/P1=5 计数。
 V05_TEMPLATE_SPECS = {
-    "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人", "v0.5.1-dev", "评审中（v0.5.1 收口候选）"),
-    "TPL-V05-002": ("20_Safety/UL9540A_Thermal_Runaway_Test_Evidence_Template.md", "P0", "功能安全负责人", "v0.5.1-dev", "评审中（v0.5.1 收口候选）"),
+    "TPL-V05-001": ("20_Safety/ESS_Hazard_Analysis_SIL_Determination_Template.md", "P0", "功能安全负责人", "v0.5.1", "已批准（内部基线）"),
+    "TPL-V05-002": ("20_Safety/UL9540A_Thermal_Runaway_Test_Evidence_Template.md", "P0", "功能安全负责人", "v0.5.1", "已批准（内部基线）"),
 }
 
 
@@ -205,7 +205,7 @@ def main() -> int:
 
     print(
         "Validated 18 templates (P0=13, P1=5), "
-        f"{v05_found} v0.5.1 correction candidate template(s) and "
+        f"{v05_found} released v0.5.1 template(s) and "
         f"{len(pilot_ids)} MK8 pilot copies: OK"
     )
     return 0
