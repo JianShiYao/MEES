@@ -2,7 +2,7 @@
 """MEES 统一检查入口（v0.5 WP1 P0 切片）。
 
 把仓库检查聚合为带规则编号的诊断，并输出稳定 JSON 报告。
-- 输入：默认 `git ls-files` 的受控 Markdown（自动尊重 .gitignore）。
+- 输入：默认 Git 已跟踪和未忽略的新 Markdown（自动尊重 .gitignore）。
 - 输出：控制台摘要 + `build/check/report.json`（Git 忽略目录）。
 - 诊断字段：rule_id / severity / path / line / message / remediation。
 - 退出码：0 通过；1 发现 error 级规则失败；2 工具或输入错误。
@@ -45,12 +45,12 @@ def rel(path: Path) -> str:
 def git_tracked(pattern: str) -> list[Path]:
     try:
         out = subprocess.run(
-            ["git", "ls-files", "-z", pattern],
-            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", check=True,
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", pattern],
+            cwd=ROOT, capture_output=True, check=True,
         )
     except (subprocess.CalledProcessError, FileNotFoundError) as exc:
         raise SystemExit(f"[tool] git ls-files 失败：{exc}")
-    return [ROOT / line for line in out.stdout.split("\0") if line.strip()]
+    return [ROOT / line for line in out.stdout.decode("utf-8").split("\0") if line.strip()]
 
 
 def diag(rule_id, severity, path, line, message, remediation):

@@ -1,0 +1,1 @@
+{"id":"requirement","version":"1.0.0","human_owner":"需求工程负责人","allowed_actions":["read_controlled_input","detect_requirement_ids","suggest_gaps"],"forbidden_actions":["approve_gate","change_evidence_state","publish_product","write_baseline"],"input_kinds":["markdown"],"output_kind":"requirement_analysis_draft"}

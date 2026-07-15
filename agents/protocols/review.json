@@ -1,0 +1,1 @@
+{"id":"review","version":"1.0.0","human_owner":"质量负责人","allowed_actions":["read_controlled_input","apply_checklist","suggest_findings"],"forbidden_actions":["approve_gate","claim_independence","change_evidence_state","close_finding"],"input_kinds":["markdown"],"output_kind":"review_findings_draft"}

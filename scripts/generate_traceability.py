@@ -176,6 +176,50 @@ def closure(start, edges, directions):
     return seen, path
 
 
+def upstream_closure(start, edges):
+    """Follow engineering relations from a verification object back upstream."""
+    adj = {}
+    for edge in edges:
+        if edge["type"] in {"derive", "trace"}:
+            adj.setdefault(edge["to"], []).append(edge["from"])
+        elif edge["type"] == "verifies":
+            adj.setdefault(edge["from"], []).append(edge["to"])
+    seen, stack = set(), [start]
+    while stack:
+        current = stack.pop()
+        for upstream in adj.get(current, []):
+            if upstream not in seen:
+                seen.add(upstream)
+                stack.append(upstream)
+    return seen
+
+
+def build_query_pairs(nodes, edges, limit=3):
+    """Build reproducible forward/reverse query pairs with a round-trip verdict."""
+    candidates = sorted(
+        (obj_id for obj_id in nodes if kind_of(obj_id) in REQ_KINDS),
+        key=lambda obj_id: (PREFIXES.index(kind_of(obj_id)), obj_id),
+    )
+    pairs = []
+    for start in candidates:
+        forward = sorted(closure(start, edges, {"derive", "trace"})[0])
+        tests = [obj_id for obj_id in forward if kind_of(obj_id) == "TST"]
+        if not tests:
+            continue
+        reverse_start = tests[0]
+        reverse = sorted(upstream_closure(reverse_start, edges))
+        pairs.append({
+            "forward_from": start,
+            "forward_reaches": forward,
+            "reverse_from": reverse_start,
+            "reverse_reaches": reverse,
+            "round_trip": start in reverse,
+        })
+        if len(pairs) == limit:
+            break
+    return pairs
+
+
 def diagnose(nodes, edges, defined, test_status):
     diags = []
     incident = set()
@@ -231,10 +275,11 @@ def main() -> int:
     diags = diagnose(nodes, edges, defined, test_status)
 
     # 演示查询
-    fwd_start = next((o for o in nodes if kind_of(o) == "PRD"), None)
-    rev_start = next((o for o in sorted(nodes) if kind_of(o) == "TST"), None)
-    fwd = sorted(closure(fwd_start, edges, {"derive", "trace"})[0]) if fwd_start else []
-    rev = sorted(closure(rev_start, edges, {"verifies"})[0]) if rev_start else []
+    query_pairs = build_query_pairs(nodes, edges)
+    first_query = query_pairs[0] if query_pairs else {
+        "forward_from": None, "forward_reaches": [],
+        "reverse_from": None, "reverse_reaches": [], "round_trip": False,
+    }
 
     counts = {"error": 0, "warning": 0, "info": 0}
     for d in diags:
@@ -250,8 +295,11 @@ def main() -> int:
         "edges": edges,
         "diagnostics": diags,
         "queries": {
-            "forward_from": fwd_start, "forward_reaches": fwd,
-            "reverse_from": rev_start, "reverse_reaches": rev,
+            "forward_from": first_query["forward_from"],
+            "forward_reaches": first_query["forward_reaches"],
+            "reverse_from": first_query["reverse_from"],
+            "reverse_reaches": first_query["reverse_reaches"],
+            "query_pairs": query_pairs,
         },
     }
     outdir = ROOT / args.outdir
@@ -266,9 +314,15 @@ def main() -> int:
     md = [f"# 追溯矩阵（{args.source}）", "",
           f"- 对象：{len(nodes)}　关系：{len(edges)}",
           f"- 诊断：error={counts['error']} warning={counts['warning']} info={counts['info']}",
-          f"- 正向查询 {fwd_start} → 可达 {len(fwd)} 个对象",
-          f"- 反向查询 {rev_start} → 上溯 {len(rev)} 个对象", "",
-          "## 关系", "", "| from | type | to |", "|---|---|---|"]
+          f"- 双向查询对：{len(query_pairs)} 组", "",
+          "## 双向查询", "", "| forward | reverse | round trip |", "|---|---|---|"]
+    for query in query_pairs:
+        md.append(
+            f"| {query['forward_from']} -> {len(query['forward_reaches'])} | "
+            f"{query['reverse_from']} -> {len(query['reverse_reaches'])} | "
+            f"{'yes' if query['round_trip'] else 'no'} |"
+        )
+    md += ["", "## 关系", "", "| from | type | to |", "|---|---|---|"]
     for e in edges:
         md.append(f"| {e['from']} | {e['type']} | {e['to']} |")
     md += ["", "## 诊断", "", "| rule | severity | object | message |", "|---|---|---|---|"]
@@ -280,7 +334,7 @@ def main() -> int:
           f"error={counts['error']} warning={counts['warning']} info={counts['info']}")
     for d in diags:
         print(f"  [{d['severity']}] {d['rule_id']} {d.get('object','')} {d['message']}")
-    print(f"正向 {fwd_start}→{len(fwd)}；反向 {rev_start}→{len(rev)}；输出：{rel(outdir)}")
+    print(f"双向查询对={len(query_pairs)}；输出：{rel(outdir)}")
 
     return 1 if counts["error"] else 0
 

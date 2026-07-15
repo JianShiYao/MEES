@@ -1,0 +1,1 @@
+{"id":"metrics","version":"1.0.0","human_owner":"质量负责人","allowed_actions":["read_controlled_input","interpret_metrics","suggest_actions"],"forbidden_actions":["approve_gate","fabricate_denominator","change_evidence_state","publish_product"],"input_kinds":["json"],"output_kind":"metrics_analysis_draft"}

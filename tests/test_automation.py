@@ -129,6 +129,25 @@ class Traceability(unittest.TestCase):
                         "| TST-Z-001 | SYS-REQ-Z-900 | 已执行 |\n")
         self.assertFalse(any(x["rule_id"] == "TRC-NO-VERIF" for x in d))
 
+    def test_three_bidirectional_query_pairs(self):
+        nodes = {
+            f"SYS-REQ-X-{idx:03d}": {"kind": "SYS-REQ"}
+            for idx in range(1, 4)
+        }
+        nodes.update({
+            f"TST-X-{idx:03d}": {"kind": "TST"}
+            for idx in range(1, 4)
+        })
+        edges = []
+        for idx in range(1, 4):
+            req = f"SYS-REQ-X-{idx:03d}"
+            tst = f"TST-X-{idx:03d}"
+            edges.append({"from": req, "to": tst, "type": "trace"})
+            edges.append({"from": tst, "to": req, "type": "verifies"})
+        pairs = gt.build_query_pairs(nodes, edges)
+        self.assertEqual(len(pairs), 3)
+        self.assertTrue(all(pair["round_trip"] for pair in pairs))
+
 
 class Metrics(unittest.TestCase):
     def test_pct_normal(self):

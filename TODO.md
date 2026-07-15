@@ -79,13 +79,13 @@
 - [x] 建立 [v0.6.0 Agent 与 Obsidian 集成建设计划](docs/00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)。
 - [x] 建立 Agent 治理总览和 Obsidian/MCP O0–O3 分层接入策略。
 - [x] V6-G0：JianShi 批准 WP0–WP7、权限、证据边界、M6 和 F4/F5/F6 实施顺序。
-- [ ] WP1：关闭 F4，建立单一本地全检查入口和单次至少三条正反追溯查询。
-- [ ] WP1：关闭 F5，逐项处置 MK8 15 项、ESS 4 项追溯 warning。
-- [ ] WP1：关闭 F6，在 CI 中真实解析/渲染全部 Mermaid 围栏。
-- [ ] WP2：建立 Agent 公共协议、Schema、上下文清单、诊断和审计日志合同。
-- [ ] WP3：实现 Requirement、Architecture、Test Agent 最小切片。
-- [ ] WP4：实现 Review、ASPICE、Metrics Agent 最小切片。
-- [ ] WP5：完成 O0/O1 基线和 O2 只读试点；O3 受控写入须单独通过 V6-G4。
-- [ ] WP6：在 BMS 参考项目跑通六类 Agent 辅助链，并保持产品 `No-Go`。
-- [ ] WP7：完成测试、跨平台 CI、干净导出、检查表、人工评审和发布候选。
+- [x] WP1：关闭 F4，建立单一本地全检查入口和单次至少三条正反追溯查询。
+- [x] WP1：关闭 F5，以真实定义/关系处置历史 MK8/ESS 追溯 warning。
+- [x] WP1：关闭 F6，在 CI 中使用固定版本 CLI 真实解析/渲染全部 Mermaid 围栏。
+- [x] WP2：建立 Agent 公共协议、Schema、上下文清单、诊断和审计日志合同。
+- [x] WP3：实现 Requirement、Architecture、Test Agent 最小切片。
+- [x] WP4：实现 Review、ASPICE、Metrics Agent 最小切片。
+- [ ] WP5：O0/O1 与 O2/O3 适配器和安全测试完成；真实 O2/O3 分别待 V6-G3/V6-G4。
+- [x] WP6：在 BMS 参考项目跑通六类 Agent 辅助链，并保持产品 `No-Go`。
+- [ ] WP7：检查表和评审候选完成；候选提交、Linux CI、干净导出及人工评审待完成。
 - [ ] V6-G6：严重/主要问题清零，人工批准 M6 和 v0.6.0 内部基线。

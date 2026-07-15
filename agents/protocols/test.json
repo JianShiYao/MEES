@@ -1,0 +1,1 @@
+{"id":"test","version":"1.0.0","human_owner":"测试负责人","allowed_actions":["read_controlled_input","detect_test_ids","suggest_coverage_gaps"],"forbidden_actions":["approve_gate","invent_execution_result","change_evidence_state","publish_product"],"input_kinds":["markdown","json"],"output_kind":"test_analysis_draft"}

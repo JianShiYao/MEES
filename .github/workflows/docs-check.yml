@@ -13,27 +13,13 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
-      # 脚本单元测试（成功/规则失败/无数据/格式错误/断链）
-      - name: 脚本单元测试
-        run: python -m unittest discover -s tests -p "test_*.py"
-      # 自动化检查（标准库脚本，error 级失败即红）
-      - name: Markdown 链接
-        run: python scripts/check_markdown_links.py
-      - name: 模板资产
-        run: python scripts/check_template_assets.py
-      - name: MEES 统一检查
-        run: python scripts/check_mees.py
-      - name: 追溯生成（MK8 试点）
-        run: python scripts/generate_traceability.py
-      - name: 追溯生成（ESS 演练）
-        run: python scripts/generate_traceability.py --source examples/ess-demo-pilot --outdir build/traceability_ess
-      - name: 指标采集
-        run: python scripts/collect_metrics.py
-      - name: 生成 Dashboard
-        run: python scripts/generate_dashboard.py
-      # 文档站严格构建
-      - name: MkDocs 严格构建
-        run: mkdocs build --strict
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 安装固定版本 Mermaid CLI
+        run: npm install --global @mermaid-js/mermaid-cli@11.12.0
+      - name: MEES 全量统一校验
+        run: python scripts/run_all_checks.py
       # 生成制品供人工浏览（不作为受控源或发布证据）
       - name: 上传检查与 Dashboard 制品
         if: always()

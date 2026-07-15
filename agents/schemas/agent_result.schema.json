@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mees.local/schemas/agent_result.schema.json",
+  "title": "MEES Agent Result",
+  "type": "object",
+  "required": ["schema_version", "run_id", "agent", "protocol_version", "status", "decision", "evidence_state", "human_owner", "inputs", "summary", "findings", "prohibited_actions"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string"},
+    "agent": {"type": "string"},
+    "protocol_version": {"type": "string"},
+    "status": {"enum": ["completed", "rejected"]},
+    "decision": {"const": "human_review_required"},
+    "evidence_state": {"enum": ["D", "S"]},
+    "human_owner": {"type": "string"},
+    "inputs": {"type": "array"},
+    "summary": {"type": "object"},
+    "findings": {"type": "array"},
+    "prohibited_actions": {"type": "array"}
+  }
+}

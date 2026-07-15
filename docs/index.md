@@ -20,7 +20,7 @@
 
 ## 当前建设重点
 
-1. V6-G0 已批准；阅读 [v0.6 启动评审记录](11_Process_Management/v0.6启动评审记录.md)和[建设计划](00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)，确认实施边界。
-2. 当前进入 WP1，按 F4/F5/F6 顺序补齐单一检查入口、追溯 warning 处置和 Mermaid 真实渲染。
-3. 冻结六类 Agent 的共同协议、权限和证据边界，再进入 BMS 参考项目走查。
-4. Obsidian 集成保持 O0 文件系统优先；O2 只读和 O3 受控写入分别通过 V6-G3/V6-G4 后启用。
+1. 阅读 [v0.6 基线评审记录](11_Process_Management/v0.6基线评审记录.md)和[基线检查表](14_Checklists/v0.6_Agent与Obsidian基线检查表.md)，核对当前候选与开放项。
+2. 使用 `python scripts/run_all_checks.py --allow-npx` 复现统一检查、追溯、Agent 案例、Mermaid 和 MkDocs 结果。
+3. 复核 [BMS Agent 协作走查](15_Case_Study/v0.6_BMS_Agent协作走查.md)，确认六类输出均需人工决定且产品保持 `No-Go`。
+4. Obsidian 保持 O0 文件系统优先；真实 O2/O3 在 V6-G3/V6-G4 前不得启用或宣称完成。

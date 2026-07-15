@@ -38,6 +38,7 @@ nav:
   - 度量:
       - 指标字典: 12_Metrics/指标字典.md
   - 过程管理:
+      - v0.6 基线评审记录: 11_Process_Management/v0.6基线评审记录.md
       - v0.6 启动评审记录: 11_Process_Management/v0.6启动评审记录.md
       - v0.5 基线评审记录: 11_Process_Management/v0.5基线评审记录.md
       - v0.4 基线评审记录: 11_Process_Management/v0.4基线评审记录.md
@@ -52,6 +53,7 @@ nav:
       - v0.4 模板目录与使用规则: 13_Templates/v0.4模板目录与使用规则.md
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
+      - v0.6 Agent 与 Obsidian 基线检查表: 14_Checklists/v0.6_Agent与Obsidian基线检查表.md
       - v0.5 自动化与度量基线检查表: 14_Checklists/v0.5自动化与度量基线检查表.md
       - v0.4 工程模板基线检查表: 14_Checklists/v0.4工程模板基线检查表.md
       - 嵌入式目标级验证检查表: 14_Checklists/嵌入式目标级验证检查表.md
@@ -65,6 +67,7 @@ nav:
       - 发布管理过程检查表: 14_Checklists/发布管理过程检查表.md
       - 配置管理过程检查表: 14_Checklists/配置管理过程检查表.md
   - 案例:
+      - v0.6 BMS Agent 协作走查: 15_Case_Study/v0.6_BMS_Agent协作走查.md
       - MK8 RSIIC V1 v0.4 模板走查: 15_Case_Study/MK8_RSIIC_V1_v0.4模板走查.md
       - MK8 RSIIC V1 项目试点: 15_Case_Study/MK8_RSIIC_V1项目试点.md
       - MK8 RSIIC V1 证据台账: 15_Case_Study/MK8_RSIIC_V1证据台账.md

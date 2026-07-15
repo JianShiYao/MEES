@@ -44,13 +44,14 @@ flowchart TB
 | `.github/` | 保存 GitHub 自动化工作流，当前用于检查文档构建。 | 读取 `mkdocs.yml` 和 `docs/`，在提交或合并时验证文档站。 |
 | `.obsidian/` | 保存 Obsidian 仓库级配置和插件开关。 | 让整个仓库可以作为 Obsidian Vault 使用；工作区和关系图状态属于本地文件，已由 `.gitignore` 排除。 |
 | `.agents/` | 预留给开发工具或 Agent 运行时的项目级配置。 | 与 `agents/` 分工：前者面向工具运行配置，后者面向可复用的工程 Agent 资产；当前目录尚未启用正式内容。 |
+| `config/` | 保存可提交且不含秘密的工具配置，当前包含 Obsidian O0–O3 权限和环境变量约定。 | 由 `scripts/obsidian_adapter.py` 读取；服务地址和 Token 只来自本地环境，不进入仓库。 |
 | `docs/` | MEES 正式知识库和 MkDocs 文档站的内容源。 | 由 `mkdocs.yml` 组织导航，是其他资产的使用说明、过程依据和治理入口。 |
 | `templates/` | v0.4 的 18 项工程模板及两项 `TPL-V05-*` v0.5.1 增量模板已形成内部基线。 | 模板依据来自 `docs/`；目录和使用说明进入 `docs/13_Templates/`，模拟实例与走查结论进入 `examples/` 和 `docs/15_Case_Study/`。 |
 | `checklists/` | 预留可直接执行或被工具读取的工程、质量、安全和发布检查表。 | 检查项依据来自过程文档；面向阅读的检查表发布在 `docs/14_Checklists/`。 |
 | `examples/` | 放置本地项目源代码或可公开的最小示例；原始项目可保持独立 Git 历史并由外层仓库忽略。 | 使用 `templates/` 和 `checklists/` 落实 `docs/` 中的过程，过程实例与脱敏结论进入 `docs/15_Case_Study/`。 |
-| `scripts/` | 预留链接检查、追溯矩阵生成、指标汇总和发布文档生成脚本。 | 自动处理 `docs/`、`templates/`、`checklists/` 和项目数据，并向 CI 或 `dashboard/` 提供结果。 |
+| `scripts/` | 保存统一检查、追溯、指标、Dashboard、Agent 和 Obsidian 适配脚本。 | 自动处理 `docs/`、`templates/`、`examples/` 和协议资产，并向 CI 或 `build/` 提供可复现结果。 |
 | `dashboard/` | 预留需求覆盖率、测试覆盖率、缺陷趋势、构建状态、风险和过程能力视图。 | 汇总 `scripts/` 生成的指标，用于反馈过程执行效果并推动改进。 |
-| `agents/` | 保存可复用的 AI Agent 协议、提示词、结构化输入输出、样例和测试资产；v0.6 治理骨架已启动。 | Agent 以 `docs/` 为规则来源，调用模板、检查表和脚本辅助评审、测试、度量与知识维护。 |
+| `agents/` | 保存六类 AI Agent 的版本化协议和结构化输入输出 Schema。 | `scripts/agent_runtime.py` 按这些合同读取受控输入并生成待人工复核的 D/S 建议。 |
 
 `.git/` 是 Git 自动维护的版本库元数据，不存放 MEES 业务内容，不应手工修改。
 
@@ -130,8 +131,8 @@ mkdocs serve
 ## 当前版本
 
 - 版本：v0.5.1（内部收口基线，V5.1-G1 批准）
-- 阶段：v0.6 Agent/Obsidian 集成启动
-- 状态：JianShi 已批准 V6-G0，当前进入 WP1，优先关闭 F4/F5/F6；六类 Agent、Obsidian MCP 和 BMS 参考项目仍受 V6-G1–G5 控制。v0.5.1 证据仍为工具 `P` + 数据 `S`，不构成产品批准、真实独立评估、标准符合性、认证或能力等级证明
+- 阶段：v0.6 Agent/Obsidian 集成人工评审候选
+- 状态：WP1–WP6 的实现和机器证据已形成；V6-G1/G2/G5 待人工确认，真实 Obsidian O2/O3 分别受 V6-G3/V6-G4 控制，V6-G6 当前 `Conditional No-Go`。工具与模拟数据不构成产品批准、真实独立评估、标准符合性、认证或能力等级证明
 - 日期：2026-07-15
 
 ## 许可证说明

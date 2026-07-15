@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mees.local/schemas/agent_protocol.schema.json",
+  "title": "MEES Agent Protocol",
+  "type": "object",
+  "required": ["id", "version", "human_owner", "allowed_actions", "forbidden_actions", "input_kinds", "output_kind"],
+  "properties": {
+    "id": {"type": "string"},
+    "version": {"type": "string"},
+    "human_owner": {"type": "string"},
+    "allowed_actions": {"type": "array", "items": {"type": "string"}},
+    "forbidden_actions": {"type": "array", "minItems": 4, "items": {"type": "string"}},
+    "input_kinds": {"type": "array", "items": {"type": "string"}},
+    "output_kind": {"type": "string"}
+  }
+}

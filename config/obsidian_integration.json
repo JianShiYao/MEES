@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "mode": "O0",
+  "read_roots": ["docs", "examples"],
+  "write_roots": ["examples/agent-drafts"],
+  "remote_url_env": "MEES_OBSIDIAN_URL",
+  "remote_token_env": "MEES_OBSIDIAN_TOKEN",
+  "remote_write_enabled": false,
+  "local_write_enabled": false,
+  "audit_path": "build/obsidian/audit.jsonl"
+}

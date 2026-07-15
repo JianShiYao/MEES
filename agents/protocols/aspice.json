@@ -1,0 +1,1 @@
+{"id":"aspice","version":"1.0.0","human_owner":"质量负责人","allowed_actions":["read_controlled_input","detect_process_references","suggest_mapping_gaps"],"forbidden_actions":["approve_gate","claim_capability_level","claim_independence","change_evidence_state"],"input_kinds":["markdown"],"output_kind":"aspice_analysis_draft"}

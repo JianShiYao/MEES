@@ -1,0 +1,1 @@
+{"id":"architecture","version":"1.0.0","human_owner":"系统负责人或软件负责人","allowed_actions":["read_controlled_input","detect_architecture_ids","suggest_interface_gaps"],"forbidden_actions":["approve_gate","change_evidence_state","publish_product","write_baseline"],"input_kinds":["markdown"],"output_kind":"architecture_analysis_draft"}
