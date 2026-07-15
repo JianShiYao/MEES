@@ -6,6 +6,7 @@ import difflib
 import hashlib
 import json
 import os
+import ssl
 import tempfile
 import urllib.request
 from datetime import datetime, timezone
@@ -33,6 +34,20 @@ class ObsidianAdapter:
         if self.root not in target.parents:
             raise ObsidianAccessError(f"path traversal rejected: {relative}")
         return target
+
+    def _ssl_context(self):
+        """A 方案：用配置的受信 CA 证书做正常 TLS 校验；未配置则用系统默认（自签会失败，属预期）。"""
+        ca = self.config.get("remote_ca_cert")
+        if not ca:
+            return None
+        ca_path = ca if os.path.isabs(ca) else str(self.root / ca)
+        return ssl.create_default_context(cafile=ca_path)
+
+    def _http_get(self, url, headers):
+        context = self._ssl_context() if url.lower().startswith("https") else None
+        request = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(request, timeout=5, context=context) as response:
+            return response.read().decode("utf-8")
 
     def _audit(self, action, target, outcome, detail=None):
         path = self.root / self.config["audit_path"]
@@ -76,9 +91,7 @@ class ObsidianAdapter:
         if self.transport:
             content = self.transport(base, relative, headers)
         else:
-            request = urllib.request.Request(f"{base.rstrip('/')}/vault/{relative}", headers=headers)
-            with urllib.request.urlopen(request, timeout=5) as response:
-                content = response.read().decode("utf-8")
+            content = self._http_get(f"{base.rstrip('/')}/vault/{relative}", headers)
         self._audit("O2_READ", relative, "allowed", {"sha256": hashlib.sha256(content.encode()).hexdigest()})
         return content
 
@@ -93,9 +106,7 @@ class ObsidianAdapter:
         if self.transport:
             content = self.transport(base, "__active__", headers)
         else:
-            request = urllib.request.Request(f"{base.rstrip('/')}/active/", headers=headers)
-            with urllib.request.urlopen(request, timeout=5) as response:
-                content = response.read().decode("utf-8")
+            content = self._http_get(f"{base.rstrip('/')}/active/", headers)
         self._audit("O2_ACTIVE", "active-note", "allowed", {"sha256": hashlib.sha256(content.encode()).hexdigest()})
         return content
 

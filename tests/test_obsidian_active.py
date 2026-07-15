@@ -47,6 +47,28 @@ class ReadActive(unittest.TestCase):
         with self.assertRaises(oa.ObsidianAccessError):
             a.read_active()
 
+    def test_ssl_context_none_without_ca(self):  # 未配 CA → 用系统默认（自签会失败，属预期）
+        a = oa.ObsidianAdapter(root=self.tmp, config=self.cfg)
+        self.assertIsNone(a._ssl_context())
+
+    def test_ssl_context_uses_configured_ca(self):  # A 方案：用配置的 CA 证书路径做校验
+        cfg = dict(self.cfg, remote_ca_cert="config/obsidian-cert.pem")
+        a = oa.ObsidianAdapter(root=self.tmp, config=cfg)
+        captured = {}
+
+        def fake_context(cafile=None):
+            captured["cafile"] = cafile
+            return "ctx"
+
+        original = oa.ssl.create_default_context
+        oa.ssl.create_default_context = fake_context
+        try:
+            ctx = a._ssl_context()
+        finally:
+            oa.ssl.create_default_context = original
+        self.assertEqual(ctx, "ctx")
+        self.assertTrue(captured["cafile"].replace("\\", "/").endswith("config/obsidian-cert.pem"))
+
     def test_audit_records_no_token(self):  # 审计不含 token
         a = oa.ObsidianAdapter(root=self.tmp, config=self.cfg)
         try:

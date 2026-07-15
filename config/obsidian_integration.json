@@ -5,6 +5,7 @@
   "write_roots": ["examples/agent-drafts"],
   "remote_url_env": "MEES_OBSIDIAN_URL",
   "remote_token_env": "MEES_OBSIDIAN_TOKEN",
+  "remote_ca_cert": "",
   "remote_write_enabled": false,
   "local_write_enabled": false,
   "audit_path": "build/obsidian/audit.jsonl"

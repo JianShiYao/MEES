@@ -17,3 +17,7 @@ examples/rsiic_-mk8_-v1/
 
 # v0.5 automation generated artifacts
 build/
+
+# 本地 Obsidian Local REST API 证书（机器相关，不入库）
+config/obsidian-cert.pem
+config/*-cert.pem
