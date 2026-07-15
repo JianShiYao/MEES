@@ -4,6 +4,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -68,6 +69,33 @@ class ReadActive(unittest.TestCase):
             oa.ssl.create_default_context = original
         self.assertEqual(ctx, "ctx")
         self.assertTrue(captured["cafile"].replace("\\", "/").endswith("config/obsidian-cert.pem"))
+
+    def test_active_degrades_cleanly_on_connection_error(self):  # 断连不崩溃
+        os.environ["TEST_OBS_URL"] = "https://127.0.0.1:27124"
+        os.environ["TEST_OBS_TOKEN"] = "secret"
+
+        def transport(base, relative, headers):
+            raise urllib.error.URLError("connection refused")
+
+        a = oa.ObsidianAdapter(root=self.tmp, config=self.cfg, transport=transport)
+        with self.assertRaises(oa.ObsidianAccessError):   # 干净拒绝而非 URLError 崩溃
+            a.read_active()
+        audit = (self.tmp / "build/obsidian/audit.jsonl").read_text(encoding="utf-8")
+        self.assertIn("unavailable_connection_error", audit)
+
+    def test_remote_read_degrades_to_o0_on_connection_error(self):  # 断连降级 O0
+        os.environ["TEST_OBS_URL"] = "https://127.0.0.1:27124"
+        os.environ["TEST_OBS_TOKEN"] = "secret"
+        (self.tmp / "docs").mkdir(parents=True, exist_ok=True)
+        (self.tmp / "docs/index.md").write_text("# local\n", encoding="utf-8")
+
+        def transport(base, relative, headers):
+            raise urllib.error.URLError("connection refused")
+
+        a = oa.ObsidianAdapter(root=self.tmp, config=self.cfg, transport=transport)
+        self.assertEqual(a.read_remote("docs/index.md"), "# local\n")   # 回落本地
+        audit = (self.tmp / "build/obsidian/audit.jsonl").read_text(encoding="utf-8")
+        self.assertIn("degraded_connection_error", audit)
 
     def test_audit_records_no_token(self):  # 审计不含 token
         a = oa.ObsidianAdapter(root=self.tmp, config=self.cfg)

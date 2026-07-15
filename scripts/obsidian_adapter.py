@@ -8,6 +8,7 @@ import json
 import os
 import ssl
 import tempfile
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -88,10 +89,17 @@ class ObsidianAdapter:
             self._audit("O2_READ", relative, "degraded_to_O0")
             return self.read_local(relative)
         headers = {"Authorization": f"Bearer {token}"}
-        if self.transport:
-            content = self.transport(base, relative, headers)
-        else:
-            content = self._http_get(f"{base.rstrip('/')}/vault/{relative}", headers)
+        try:
+            if self.transport:
+                content = self.transport(base, relative, headers)
+            else:
+                content = self._http_get(f"{base.rstrip('/')}/vault/{relative}", headers)
+        except urllib.error.HTTPError:
+            raise  # HTTP 响应错误（401/404 等）应暴露，不静默降级掩盖鉴权/路径问题
+        except (urllib.error.URLError, OSError) as exc:
+            # 连接级失败（拒绝/超时/证书）：按策略降级到 O0，并审计原因（不绕过检查）
+            self._audit("O2_READ", relative, "degraded_connection_error", {"error": type(exc).__name__})
+            return self.read_local(relative)
         self._audit("O2_READ", relative, "allowed", {"sha256": hashlib.sha256(content.encode()).hexdigest()})
         return content
 
@@ -103,10 +111,15 @@ class ObsidianAdapter:
             self._audit("O2_ACTIVE", "active-note", "unavailable_no_connection")
             raise ObsidianAccessError("active note requires a live O2 connection; O0 has no active-note concept")
         headers = {"Authorization": f"Bearer {token}"}
-        if self.transport:
-            content = self.transport(base, "__active__", headers)
-        else:
-            content = self._http_get(f"{base.rstrip('/')}/active/", headers)
+        try:
+            if self.transport:
+                content = self.transport(base, "__active__", headers)
+            else:
+                content = self._http_get(f"{base.rstrip('/')}/active/", headers)
+        except (urllib.error.URLError, OSError) as exc:
+            # 活动笔记无 O0 兜底：连接/鉴权失败时不崩溃，审计并明确拒绝
+            self._audit("O2_ACTIVE", "active-note", "unavailable_connection_error", {"error": type(exc).__name__})
+            raise ObsidianAccessError(f"active note unavailable: live connection failed ({type(exc).__name__})") from exc
         self._audit("O2_ACTIVE", "active-note", "allowed", {"sha256": hashlib.sha256(content.encode()).hexdigest()})
         return content
 
@@ -220,6 +233,12 @@ def main(argv=None):
             print("rolled back")
     except ObsidianAccessError as exc:
         print(f"[rejected] {exc}", file=sys.stderr)
+        return 2
+    except urllib.error.HTTPError as exc:
+        print(f"[error] HTTP {exc.code}: 检查 API Key（token 仅放 key，不含 'Bearer '）", file=sys.stderr)
+        return 2
+    except urllib.error.URLError as exc:
+        print(f"[error] 连接失败：{exc.reason}（确认插件 REST 服务已启用、URL/证书正确）", file=sys.stderr)
         return 2
     return 0
 
