@@ -16,10 +16,11 @@
 - 功能安全人员：阅读 [ISO 26262 过程映射](07_Functional_Safety/ISO_26262过程映射.md)，复核安全生命周期、`EXT-HW` 和确认措施接口。
 - 网络安全人员：阅读 [IEC 62443 过程映射](08_Cybersecurity/IEC_62443过程映射.md)，复核 TARA、漏洞、补丁和退役接口。
 - 配置与发布负责人：阅读[配置管理过程](01_Main_Process/06_配置管理过程.md)、[变更与问题管理过程](01_Main_Process/07_变更与问题管理过程.md)和[发布管理过程](01_Main_Process/05_发布管理过程.md)。
+- Agent/工具维护者：从 [v0.6 建设计划](00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)、[Agent 协作与治理总览](16_Agents/00_Agent协作与治理总览.md)和[Obsidian 与 MCP 接入策略](17_Tools/Obsidian与MCP接入策略.md)开始。
 
 ## 当前建设重点
 
-1. 阅读 [v0.5.0 自动化与度量建设计划](00_Introduction/06_v0.5自动化与度量建设计划.md)，评审 WP0–WP7 和 V5-G0 范围。
-2. 使用 [v0.4 模板目录与使用规则](13_Templates/v0.4模板目录与使用规则.md)确认自动化输入字段及 18 项冻结模板。
-3. 阅读 [MK8 v0.4 模板走查](15_Case_Study/MK8_RSIIC_V1_v0.4模板走查.md)，确认首批追溯/指标输入仍为模拟证据且产品发布为 `No-Go`。
-4. 通过[储能功能安全映射](07_Functional_Safety/储能功能安全_IEC61508_UL9540A映射.md)评审 ESS 方法试点的适用范围和标准正本确认差距。
+1. 评审 [v0.6.0 Agent 与 Obsidian 集成建设计划](00_Introduction/07_v0.6_Agent与Obsidian集成建设计划.md)，形成 V6-G0 范围决定。
+2. 按 F4/F5/F6 顺序补齐单一检查入口、追溯 warning 处置和 Mermaid 真实渲染。
+3. 冻结六类 Agent 的共同协议、权限和证据边界，再进入 BMS 参考项目走查。
+4. Obsidian 集成保持 O0 文件系统优先；O2 只读和 O3 受控写入分别通过 V6-G3/V6-G4 后启用。
