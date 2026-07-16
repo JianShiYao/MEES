@@ -8,6 +8,7 @@ nav:
       - 建设路线图: 00_Introduction/01_建设路线图.md
       - 文档与编号规范: 00_Introduction/02_文档与编号规范.md
       - 版本规范: 00_Introduction/03_版本规范.md
+      - 边界与证据声明: 00_Introduction/09_边界与证据声明.md
       - v0.3.0 建设计划: 00_Introduction/04_v0.3建设计划.md
       - v0.4.0 工程模板建设计划: 00_Introduction/05_v0.4工程模板建设计划.md
       - v0.5.0 自动化与度量建设计划: 00_Introduction/06_v0.5自动化与度量建设计划.md
