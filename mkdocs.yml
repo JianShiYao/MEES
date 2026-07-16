@@ -42,6 +42,7 @@ nav:
   - 过程管理:
       - 评审与走查索引: 11_Process_Management/评审与走查索引.md
       - v1.0 统一遗留与差距台账: 11_Process_Management/v1.0统一遗留与差距台账.md
+      - v1.0 基线评审记录: 11_Process_Management/v1.0基线评审记录.md
       - v0.6 基线评审记录: 11_Process_Management/v0.6基线评审记录.md
       - v0.6 启动评审记录: 11_Process_Management/v0.6启动评审记录.md
       - v0.5 基线评审记录: 11_Process_Management/v0.5基线评审记录.md
@@ -57,6 +58,7 @@ nav:
       - v0.4 模板目录与使用规则: 13_Templates/v0.4模板目录与使用规则.md
       - 文档章节模板: 13_Templates/文档章节模板.md
   - 检查表:
+      - v1.0 内部整合基线检查表: 14_Checklists/v1.0内部整合基线检查表.md
       - v0.6 Agent 与 Obsidian 基线检查表: 14_Checklists/v0.6_Agent与Obsidian基线检查表.md
       - v0.5 自动化与度量基线检查表: 14_Checklists/v0.5自动化与度量基线检查表.md
       - v0.4 工程模板基线检查表: 14_Checklists/v0.4工程模板基线检查表.md
