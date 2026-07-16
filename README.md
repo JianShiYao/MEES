@@ -121,7 +121,7 @@ mkdocs serve
 
 3. 从 `docs/00_Introduction/00_MEES总览.md` 开始阅读体系总览。
 4. 阅读 `docs/00_Introduction/01_建设路线图.md` 了解建设顺序。
-5. 阅读 `docs/00_Introduction/06_v0.5自动化与度量建设计划.md` 了解当前工作包、门禁和验收标准。
+5. 阅读 `docs/00_Introduction/08_v1.0内部整合基线建设计划.md` 了解当前工作包、门禁和验收标准，并用 `docs/11_Process_Management/评审与走查索引.md` 定位历次门禁决定与走查证据。
 6. 阅读 `docs/11_Process_Management/ASPICE_ISO_IEC_33020过程映射表.md` 查看 WP1 详细映射和能力差距。
 7. 阅读 `docs/11_Process_Management/跨标准控制与证据矩阵.md` 和 `docs/11_Process_Management/v0.3差距与行动项.md` 查看共同控制及 v0.4 输入。
 8. 使用 `docs/00_Introduction/02_文档与编号规范.md` 和 `docs/00_Introduction/03_版本规范.md` 维护文档与发布。

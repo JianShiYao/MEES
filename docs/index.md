@@ -20,7 +20,9 @@
 
 ## 当前建设重点
 
-1. 阅读 [v0.6 基线评审记录](11_Process_Management/v0.6基线评审记录.md)和[基线检查表](14_Checklists/v0.6_Agent与Obsidian基线检查表.md)，核对当前候选与开放项。
-2. 使用 `python scripts/run_all_checks.py --allow-npx` 复现统一检查、追溯、Agent 案例、Mermaid 和 MkDocs 结果。
-3. 复核 [BMS Agent 协作走查](15_Case_Study/v0.6_BMS_Agent协作走查.md)，确认六类输出均需人工决定且产品保持 `No-Go`。
-4. Obsidian 保持 O0 文件系统优先；真实 O2/O3 在 V6-G3/V6-G4 前不得启用或宣称完成。
+当前阶段为 **v1.0 内部整合基线**（v0.6.0 已发布）。
+
+1. 阅读 [v1.0 内部整合基线建设计划](00_Introduction/08_v1.0内部整合基线建设计划.md)，了解整合目标、WP0–WP6、V1 门禁与退出判据。
+2. 用 [评审与走查索引](11_Process_Management/评审与走查索引.md) 定位历次门禁决定与走查证据。
+3. 使用 `python scripts/run_all_checks.py --allow-npx` 复现统一检查、追溯、Agent 案例、Mermaid 和 MkDocs 结果。
+4. 边界不变：Agent 输出均需人工决定，产品保持 `No-Go`；Obsidian 真实 O2 只读与受控本地写入已试点（V6-G3/G4 已签），REST 写入 Obsidian 为后续能力。

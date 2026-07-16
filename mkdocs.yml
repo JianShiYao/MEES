@@ -39,6 +39,7 @@ nav:
   - 度量:
       - 指标字典: 12_Metrics/指标字典.md
   - 过程管理:
+      - 评审与走查索引: 11_Process_Management/评审与走查索引.md
       - v0.6 基线评审记录: 11_Process_Management/v0.6基线评审记录.md
       - v0.6 启动评审记录: 11_Process_Management/v0.6启动评审记录.md
       - v0.5 基线评审记录: 11_Process_Management/v0.5基线评审记录.md
