@@ -50,6 +50,23 @@ class CheckMeesRules(unittest.TestCase):
         d = cm.rule_docnum([a, b])
         self.assertTrue(any(x["rule_id"] == "NUM-001" for x in d))
 
+    def test_docnum_class_mapping_on_lif(self):  # 新映射文档误用 LIF → NUM-002
+        a = self.w("docs/m.md", "# 某标准过程映射\n\n> 文档编号：MEES-LIF-099\n")
+        d = cm.rule_docnum_class([a])
+        self.assertTrue(any(x["rule_id"] == "NUM-002" for x in d))
+
+    def test_docnum_class_map_ok(self):  # 映射文档用 MAP → 通过
+        a = self.w("docs/m.md", "# 某标准过程映射\n\n> 文档编号：MEES-MAP-099\n")
+        self.assertEqual(cm.rule_docnum_class([a]), [])
+
+    def test_docnum_class_grandfather_ok(self):  # grandfather LIF → 不报
+        a = self.w("docs/m.md", "# ISO 26262 过程映射\n\n> 文档编号：MEES-LIF-005\n")
+        self.assertEqual(cm.rule_docnum_class([a]), [])
+
+    def test_docnum_class_overview_ok(self):  # 映射总览（跨域总览）→ 不报
+        a = self.w("docs/m.md", "# v0.3 标准映射总览\n\n> 文档编号：MEES-LIF-003\n")
+        self.assertEqual(cm.rule_docnum_class([a]), [])
+
     def test_fence_unbalanced(self):  # 格式错误
         a = self.w("docs/a.md", "```mermaid\nflowchart LR\nA-->B\n")
         d = cm.rule_fences([a])

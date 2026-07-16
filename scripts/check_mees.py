@@ -25,6 +25,14 @@ DOCNUM_RE = re.compile(r"^>\s*文档编号：\s*(\S+)", re.MULTILINE)
 EVID_RE = re.compile(r"证据状态：\s*([A-Za-z+/、,\s一-鿿]+?)\s*$", re.MULTILINE)
 NAV_ENTRY_RE = re.compile(r":\s*([0-9A-Za-z_][^:\s]*\.md)\s*$")
 EVID_TOKENS = {"D", "S", "P", "I"}
+H1_RE = re.compile(r"^#\s+(.+?)\s*$", re.MULTILINE)
+# 映射类文档标题特征（NUM-002）：新增此类文档必须用 MEES-MAP-*，不得挂 LIF。
+MAP_TITLE_RE = re.compile(r"(过程映射|详细映射|跨标准.*矩阵|差距与行动项)")
+# grandfather：v0.3.0 已发布、逻辑属映射类但保留 LIF 编号（见 02_文档与编号规范 §4.1）。
+GRANDFATHER_MAP_LIF = {
+    "MEES-LIF-004", "MEES-LIF-005", "MEES-LIF-006",
+    "MEES-LIF-007", "MEES-LIF-008", "MEES-LIF-009",
+}
 V051_BASELINE_DOCS = (
     "docs/00_Introduction/06_v0.5自动化与度量建设计划.md",
     "docs/05_Test_Engineering/嵌入式目标级验证方法.md",
@@ -123,6 +131,27 @@ def rule_docnum(md_files):
             out.append(diag("NUM-001", "error", files[1], 3,
                             f"文档编号重复：{num} 出现在 {', '.join(rel(f) for f in files)}",
                             "每个文档编号在仓库内必须唯一"))
+    return out
+
+
+def rule_docnum_class(md_files):
+    """NUM-002：映射类文档（标题含过程映射/详细映射/跨标准矩阵/差距行动项）必须用
+    MEES-MAP-*，不得挂 LIF；grandfather 集合（已发布）除外。防止 LIF 编号再次泛化。"""
+    out = []
+    for md in md_files:
+        text = md.read_text(encoding="utf-8")
+        title_m = H1_RE.search(text)
+        num_m = DOCNUM_RE.search(text)
+        if not title_m or not num_m:
+            continue
+        title = title_m.group(1)
+        num = num_m.group(1).strip("`")
+        if "总览" in title or not MAP_TITLE_RE.search(title):
+            continue
+        if num.startswith("MEES-LIF-") and num not in GRANDFATHER_MAP_LIF:
+            out.append(diag("NUM-002", "error", md, 1,
+                            f"映射类文档使用了 LIF 编号：{num}（{title}）",
+                            "新增映射/矩阵/差距台账须用 MEES-MAP-*；grandfather 见 02_文档与编号规范 §4.1"))
     return out
 
 
@@ -252,6 +281,7 @@ RULES = [
     rule_links,
     rule_docs_scope,
     rule_docnum,
+    rule_docnum_class,
     rule_fences,
     rule_evidence,
     rule_nav,
